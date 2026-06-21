@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CST8921 – Code-First Static Site</title>
+</head>
+
+<body>
+  <h1>Hello from a code-deployed static site</h1>
+
+  <p>Visits to this page: <span id="count">loading...</span></p>
+
+  <!-- This file stores the API base URL -->
+  <script src="config.js?v=2"></script>
+
+  <script>
+    // This JavaScript calls the serverless API.
+    // For now, the API is not created yet, so it will show "API unavailable".
+    fetch(`${window.API_BASE}/api/visits`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("count").textContent = data.count;
+      })
+      .catch(() => {
+        document.getElementById("count").textContent = "API unavailable";
+      });
+  </script>
+</body>
+</html>
